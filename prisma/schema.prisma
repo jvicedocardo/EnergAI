@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// --- MODELOS DE TU DOMINIO ---
+
+enum TipoFactura {
+  LUZ
+  AGUA
+  GAS
+}
+
+model Invoice {
+  id            String      @id @default(auto()) @map("_id") @db.ObjectId
+  filename      String
+  tipo          TipoFactura 
+  empresa       String?
+  fecha_emision String?
+  total_factura Float?
+  consumo_kwh   Float?
+  consumo_m3    Float?
+  createdAt     DateTime    @default(now())
+
+  // NUEVO: Relación con el Usuario
+  userId        String      @db.ObjectId
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// --- MODELOS DE AUTH.JS (Adaptados para MongoDB) ---
+
+model User {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  
+  // NUEVO: Un usuario puede tener muchas facturas
+  invoices      Invoice[]
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique
+  userId       String   @db.ObjectId
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
