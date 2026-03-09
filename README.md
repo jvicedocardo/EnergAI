@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ⚡ EnergyAI - Smart Dashboard & Asesor Energético
 
-## Getting Started
+EnergyAI es un SaaS (Software as a Service) moderno diseñado para ayudar a los usuarios a tomar el control de sus gastos domésticos. A través de Inteligencia Artificial (LLMs), la aplicación extrae automáticamente los datos de facturas en PDF/Imagen, los categoriza y ofrece insights personalizados de ahorro energético.
 
-First, run the development server:
+![EnergyAI Dashboard Placeholder](https://via.placeholder.com/1200x600?text=EnergyAI+Dashboard)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ Características Clave
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **📄 Extracción con IA (OCR Avanzado):** Sube tus facturas de Luz, Agua o Gas (PDF/PNG/JPG). El motor multimodal de Gemini extrae y estructura los datos clave (importe, consumos, empresa) sin necesidad de plantillas estáticas.
+- **🔒 Autenticación Segura:** Sistema multi-usuario implementado con Auth.js (NextAuth v5) y Google OAuth. Cada usuario tiene su propio espacio de datos encriptado y privado.
+- **📊 Analítica Visual:** Dashboard interactivo con gráficos de barras apiladas (Recharts) para visualizar la evolución del gasto, filtrable por año, mes y tipo de suministro.
+- **🤖 Asesor Energético IA:** Un consultor virtual integrado que analiza los datos de tu vista actual en pantalla y te ofrece consejos prácticos y personalizados para reducir tu factura.
+- **📥 Exportación a Excel:** Descarga tu histórico completo de facturas en formato `.csv` (optimizado para Europa con codificación BOM) con un solo clic.
+- **⚡ Rendimiento y Resiliencia:** Construido con React 19 Server Components, Server Actions, Streaming de UI (Suspense) y manejo de errores global para una UX impecable.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Stack Tecnológico
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Framework:** [Next.js 15 (App Router)](https://nextjs.org/)
+- **Lenguaje:** TypeScript (Modo Estricto)
+- **Base de Datos:** MongoDB + [Prisma ORM](https://www.prisma.io/)
+- **Inteligencia Artificial:** [Vercel AI SDK](https://sdk.vercel.ai/) + Google Gemini (Flash & Pro)
+- **Autenticación:** [Auth.js (v5 Beta)](https://authjs.dev/)
+- **Estilos y UI:** Tailwind CSS, Sonner (Toasts)
+- **Gráficos:** Recharts
 
-## Learn More
+## 🚀 Instalación y Despliegue Local
 
-To learn more about Next.js, take a look at the following resources:
+Si quieres clonar este repositorio y correrlo en tu máquina, sigue estos pasos:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Clonar el repositorio:**
+   ```bash
+   git clone [https://github.com/tu-usuario/energy-ai.git](https://github.com/tu-usuario/energy-ai.git)
+   cd energy-ai
+   ```
+2. **Instalar dependencias:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+3. **Configurar Variables de Entorno:**
+   Crea un archivo .env en la raíz del proyecto basándote en el archivo .env.example (necesitarás tu propia base de datos MongoDB y claves de API de Google/Gemini).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. **Sincronizar la Base de Datos (Prisma):**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   ```bash
+   npx prisma db push
+   npx prisma generate
+   ```
+
+5. **Iniciar el servidor de desarrollo:**
+
+   ```bash
+   npm run dev
+   ```
+
+   Abre http://localhost:3000 en tu navegador para ver la aplicación.
+
+## 🤝 Contribuciones
+
+Las contribuciones son bienvenidas. Siéntete libre de abrir un Issue o enviar un Pull Request para mejorar la herramienta.
