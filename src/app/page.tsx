@@ -139,7 +139,6 @@ async function DashboardData({
 
   return (
     <>
-      <Analytics />
       <ExpensesChart data={chartData} />
       <AiAdvisorCard
         key={filterContextText}
@@ -251,6 +250,7 @@ export default async function Dashboard(props: {
   if (!session?.user) {
     return (
       <main className="w-full bg-slate-50 min-h-screen">
+        <Analytics />
         <LandingHero />
       </main>
     );
@@ -263,6 +263,7 @@ export default async function Dashboard(props: {
 
   return (
     <main className="min-h-screen bg-gray-50 p-6 md:p-12">
+      <Analytics />
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
           <div>
