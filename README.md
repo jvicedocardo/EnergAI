@@ -1,4 +1,4 @@
-# ⚡ EnergyAI - Smart Dashboard & Asesor Energético
+# ⚡ EnergAI - Smart Dashboard & Asesor Energético
 
 EnergyAI es un SaaS (Software as a Service) moderno diseñado para ayudar a los usuarios a tomar el control de sus gastos domésticos. A través de Inteligencia Artificial (LLMs), la aplicación extrae automáticamente los datos de facturas en PDF/Imagen, los categoriza y ofrece insights personalizados de ahorro energético.
 
