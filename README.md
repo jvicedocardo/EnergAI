@@ -29,7 +29,7 @@ Si quieres clonar este repositorio y correrlo en tu máquina, sigue estos pasos:
 
 1. **Clonar el repositorio:**
    ```bash
-   git clone https://github.com/jvicedocardo/EnergAI
+   git clone https://github.com/jvicedocardo/EnergAI.git
    cd energy-ai
    ```
 2. **Instalar dependencias:**
