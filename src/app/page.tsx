@@ -9,6 +9,7 @@ import LandingHero from "@/components/LandingHero";
 import { Suspense } from "react";
 import { ChartSkeleton, InvoiceCardSkeleton } from "@/components/Skeletons";
 import AiAdvisorCard from "@/components/AiAdvisorCard";
+import { Analytics } from "@vercel/analytics/next";
 
 const MONTH_NAMES: Record<string, string> = {
   "01": "Ene",
@@ -138,6 +139,7 @@ async function DashboardData({
 
   return (
     <>
+      <Analytics />
       <ExpensesChart data={chartData} />
       <AiAdvisorCard
         key={filterContextText}
