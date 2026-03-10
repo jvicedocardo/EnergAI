@@ -5,6 +5,7 @@ import InvoiceFilters from "@/components/InvoiceFilters";
 import ExpensesChart from "@/components/ExpensesChart";
 import { deleteInvoice } from "@/app/actions";
 import { auth } from "@/auth";
+import LandingHero from "@/components/LandingHero";
 import { Suspense } from "react";
 import { ChartSkeleton, InvoiceCardSkeleton } from "@/components/Skeletons";
 import AiAdvisorCard from "@/components/AiAdvisorCard";
@@ -244,6 +245,14 @@ async function DashboardData({
 export default async function Dashboard(props: {
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
+  const session = await auth();
+  if (!session?.user) {
+    return (
+      <main className="w-full bg-slate-50 min-h-screen">
+        <LandingHero />
+      </main>
+    );
+  }
   const searchParams = await props.searchParams;
 
   const year = searchParams.year || new Date().getFullYear().toString();

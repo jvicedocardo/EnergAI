@@ -13,7 +13,7 @@ export default async function Navbar() {
       >
         <span className="text-2xl">⚡</span>
         <span className="text-xl font-black text-gray-900 tracking-tight">
-          Energy<span className="text-blue-600">AI</span>
+          Energ<span className="text-blue-600">AI</span>
         </span>
       </Link>
 
