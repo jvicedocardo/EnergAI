@@ -192,3 +192,57 @@ export async function generateEnergyInsight(
     return { error: "El modelo seleccionado no está disponible o ha fallado. Prueba a seleccionar otro diferente." };
   }
 }
+
+export async function seedDemoData() {
+  const DEMO_USER_ID = "65f0a1b2c3d4e5f600000000";
+
+  try {
+    // 1. Nos aseguramos de que el usuario Demo exista físicamente en la BD
+    await prisma.user.upsert({
+      where: { email: "demo@energai.com" },
+      update: {},
+      create: {
+        id: DEMO_USER_ID,
+        name: "Usuario Demo",
+        email: "demo@energai.com",
+      }
+    });
+
+    // 2. Borramos las facturas anteriores de la demo por si ejecutamos esto 2 veces
+    await prisma.invoice.deleteMany({
+      where: { userId: DEMO_USER_ID }
+    });
+
+    // 3. Inyectamos 15 facturas realistas con el campo 'filename' requerido
+    const demoInvoices = [
+      // LUZ (Iberdrola)
+      { userId: DEMO_USER_ID, filename: "factura_iberdrola_oct25.pdf", empresa: "Iberdrola", tipo: "LUZ", fecha_emision: "2025-10-15", total_factura: 45.20, consumo_kwh: 150 },
+      { userId: DEMO_USER_ID, filename: "factura_iberdrola_nov25.pdf", empresa: "Iberdrola", tipo: "LUZ", fecha_emision: "2025-11-16", total_factura: 52.10, consumo_kwh: 175 },
+      { userId: DEMO_USER_ID, filename: "factura_iberdrola_dic25.pdf", empresa: "Iberdrola", tipo: "LUZ", fecha_emision: "2025-12-14", total_factura: 68.90, consumo_kwh: 210 },
+      { userId: DEMO_USER_ID, filename: "factura_iberdrola_ene26.pdf", empresa: "Iberdrola", tipo: "LUZ", fecha_emision: "2026-01-15", total_factura: 75.40, consumo_kwh: 230 },
+      { userId: DEMO_USER_ID, filename: "factura_iberdrola_feb26.pdf", empresa: "Iberdrola", tipo: "LUZ", fecha_emision: "2026-02-15", total_factura: 62.30, consumo_kwh: 190 },
+      { userId: DEMO_USER_ID, filename: "factura_iberdrola_mar26.pdf", empresa: "Iberdrola", tipo: "LUZ", fecha_emision: "2026-03-10", total_factura: 55.00, consumo_kwh: 165 },
+      
+      // GAS (Naturgy)
+      { userId: DEMO_USER_ID, filename: "naturgy_gas_10_2025.pdf", empresa: "Naturgy", tipo: "GAS", fecha_emision: "2025-10-05", total_factura: 15.50, consumo_kwh: 50 },
+      { userId: DEMO_USER_ID, filename: "naturgy_gas_11_2025.pdf", empresa: "Naturgy", tipo: "GAS", fecha_emision: "2025-11-06", total_factura: 45.80, consumo_kwh: 320 },
+      { userId: DEMO_USER_ID, filename: "naturgy_gas_12_2025.pdf", empresa: "Naturgy", tipo: "GAS", fecha_emision: "2025-12-04", total_factura: 89.20, consumo_kwh: 850 },
+      { userId: DEMO_USER_ID, filename: "naturgy_gas_01_2026.pdf", empresa: "Naturgy", tipo: "GAS", fecha_emision: "2026-01-05", total_factura: 110.40, consumo_kwh: 1050 },
+      { userId: DEMO_USER_ID, filename: "naturgy_gas_02_2026.pdf", empresa: "Naturgy", tipo: "GAS", fecha_emision: "2026-02-05", total_factura: 78.60, consumo_kwh: 700 },
+      
+      // AGUA (Canal Isabel II / Local)
+      { userId: DEMO_USER_ID, filename: "recibo_agua_octubre.pdf", empresa: "Aguas de Valencia", tipo: "AGUA", fecha_emision: "2025-10-28", total_factura: 22.10, consumo_m3: 12 },
+      { userId: DEMO_USER_ID, filename: "recibo_agua_diciembre.pdf", empresa: "Aguas de Valencia", tipo: "AGUA", fecha_emision: "2025-12-28", total_factura: 23.40, consumo_m3: 13 },
+      { userId: DEMO_USER_ID, filename: "recibo_agua_febrero.pdf", empresa: "Aguas de Valencia", tipo: "AGUA", fecha_emision: "2026-02-28", total_factura: 21.80, consumo_m3: 11 },
+    ];
+
+    // Usamos Prisma para crear todas de golpe
+    // @ts-expect-error (Ignoramos el tipado estricto solo para el seed)
+    await prisma.invoice.createMany({ data: demoInvoices });
+
+    return { success: true, message: "Datos inyectados correctamente." };
+  } catch (error) {
+    console.error(error);
+    return { error: "Fallo al inyectar datos." };
+  }
+}

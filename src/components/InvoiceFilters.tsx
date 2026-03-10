@@ -23,13 +23,13 @@ export default function InvoiceFilters({
         >
           Año
         </label>
-        {/* Cambiamos a text-gray-900 para máximo contraste */}
         <select
           id="year"
           name="year"
           defaultValue={currentYear}
           className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border text-sm text-gray-900 bg-white font-medium"
         >
+          <option value="ALL">Todos los años</option>
           <option value="2026">2026</option>
           <option value="2025">2025</option>
           <option value="2024">2024</option>

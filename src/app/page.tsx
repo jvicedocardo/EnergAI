@@ -66,14 +66,24 @@ async function DashboardData({
   if (!session?.user?.id) return null;
 
   const { year, month, type } = searchParams;
-  const datePrefix = month === "ALL" ? `${year}-` : `${year}-${month}`;
 
   const whereClause: Prisma.InvoiceWhereInput = {
-    fecha_emision: { startsWith: datePrefix },
+    //fecha_emision: { startsWith: datePrefix },
     userId: session.user.id,
   };
 
   if (type !== "ALL") whereClause.tipo = type as "LUZ" | "AGUA" | "GAS";
+
+  if (year !== "ALL") {
+    // Escenario A: Tenemos un año concreto (Vuelve tu lógica original)
+    // Si mes es ALL busca "2025-", si es un mes busca "2025-10-"
+    const datePrefix = month === "ALL" ? `${year}-` : `${year}-${month}-`;
+    whereClause.fecha_emision = { startsWith: datePrefix };
+  } else if (year === "ALL" && month !== "ALL") {
+    // Escenario B: Todos los años, pero un mes en concreto (Ej. Todos los octubres)
+    // Buscamos cualquier fecha que contenga en medio "-10-"
+    whereClause.fecha_emision = { contains: `-${month}-` };
+  }
 
   const invoices = await prisma.invoice.findMany({
     where: whereClause,

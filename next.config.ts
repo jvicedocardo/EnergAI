@@ -16,6 +16,12 @@ const nextConfig: NextConfig = {
         hostname: 'avatars.githubusercontent.com', // Servidor de avatares de GitHub (opcional)
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'api.dicebear.com', // <-- NUEVO: Para el avatar de la Demo
+        port: '',
+        pathname: '/**',
       }
     ],
   },

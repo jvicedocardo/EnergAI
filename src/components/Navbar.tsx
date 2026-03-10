@@ -54,20 +54,41 @@ export default async function Navbar() {
             </form>
           </>
         ) : (
-          /* Si el usuario NO ESTÁ logueado (Muestra botón de entrar) */
-          <form
-            action={async () => {
-              "use server";
-              await signIn("google");
-            }}
-          >
-            <button
-              type="submit"
-              className="text-sm bg-blue-600 hover:bg-blue-700 text-white font-bold py-1.5 px-4 rounded-md transition-colors shadow-sm"
+          /* Si el usuario NO ESTÁ logueado */
+          <div className="flex items-center gap-3">
+            <form
+              action={async () => {
+                "use server";
+                await signIn("credentials", {
+                  email: "demo@energai.com",
+                  password: "demo123",
+                  redirectTo: "/",
+                });
+              }}
             >
-              Iniciar Sesión
-            </button>
-          </form>
+              <button
+                type="submit"
+                className="text-sm bg-purple-100 hover:bg-purple-200 text-purple-700 font-bold py-1.5 px-4 rounded-md transition-colors shadow-sm flex items-center gap-2"
+              >
+                <span>✨</span> Ver Demo
+              </button>
+            </form>
+
+            {/* El botón de Google normal */}
+            <form
+              action={async () => {
+                "use server";
+                await signIn("google");
+              }}
+            >
+              <button
+                type="submit"
+                className="text-sm bg-blue-600 hover:bg-blue-700 text-white font-bold py-1.5 px-4 rounded-md transition-colors shadow-sm"
+              >
+                Iniciar Sesión
+              </button>
+            </form>
+          </div>
         )}
       </div>
     </nav>
