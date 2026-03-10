@@ -1,8 +1,8 @@
-# ⚡ EnergyAI - Smart Dashboard & Asesor Energético
+# ⚡ EnergAI - Smart Dashboard & Asesor Energético
 
-EnergyAI es un SaaS (Software as a Service) moderno diseñado para ayudar a los usuarios a tomar el control de sus gastos domésticos. A través de Inteligencia Artificial (LLMs), la aplicación extrae automáticamente los datos de facturas en PDF/Imagen, los categoriza y ofrece insights personalizados de ahorro energético.
+EnergAI es un SaaS (Software as a Service) moderno diseñado para ayudar a los usuarios a tomar el control de sus gastos domésticos. A través de Inteligencia Artificial (LLMs), la aplicación extrae automáticamente los datos de facturas en PDF/Imagen, los categoriza y ofrece insights personalizados de ahorro energético.
 
-![EnergyAI Dashboard Placeholder](https://via.placeholder.com/1200x600?text=EnergyAI+Dashboard)
+![EnergAI Dashboard Placeholder](https://via.placeholder.com/1200x600?text=EnergAI+Dashboard)
 
 ## ✨ Características Clave
 
@@ -29,7 +29,7 @@ Si quieres clonar este repositorio y correrlo en tu máquina, sigue estos pasos:
 
 1. **Clonar el repositorio:**
    ```bash
-   git clone [https://github.com/tu-usuario/energy-ai.git](https://github.com/tu-usuario/energy-ai.git)
+   git clone https://github.com/jvicedocardo/EnergAI.git
    cd energy-ai
    ```
 2. **Instalar dependencias:**
