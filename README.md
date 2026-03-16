@@ -2,8 +2,6 @@
 
 EnergAI es un SaaS (Software as a Service) moderno diseñado para ayudar a los usuarios a tomar el control de sus gastos domésticos. A través de Inteligencia Artificial (LLMs), la aplicación extrae automáticamente los datos de facturas en PDF/Imagen, los categoriza y ofrece insights personalizados de ahorro energético.
 
-![EnergAI Dashboard Placeholder](https://via.placeholder.com/1200x600?text=EnergAI+Dashboard)
-
 ## ✨ Características Clave
 
 - **📄 Extracción con IA (OCR Avanzado):** Sube tus facturas de Luz, Agua o Gas (PDF/PNG/JPG). El motor multimodal de Gemini extrae y estructura los datos clave (importe, consumos, empresa) sin necesidad de plantillas estáticas.
